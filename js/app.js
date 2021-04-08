@@ -34,6 +34,37 @@ function displayEmployees(employeesData) {
     gridContainer.innerHTML = employeeHTML;
 }
 
+function displayModal(index) {
+    let { 
+        name, 
+        dob, 
+        phone, 
+        email, 
+        location: { city, street, state, postcode },
+        picture
+    } = employees[index];
+
+    let date = new Date(dob.date);
+
+    // Build modal HTML
+    const modalHTML = `
+        <img src="${picture.large}" alt="" class="avatar">
+        <div class="text-container">
+            <h2 class="name">${name.first} ${name.last}</h2>
+            <p class="email">${email}</p>
+            <p class="address">${city}</p>
+            <hr />
+            <p>${phone}</p>
+            <p class="address">${street.number} ${street.name}, ${state}, ${postcode}</p>
+            <p>Birthday: ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
+        </div>
+    `;
+
+    overlay.classList.remove('hidden');
+    modalContent.innerHTML = modalHTML;
+}
+
+
 
 // Fetch data
 //----------------------------------------------------
@@ -42,3 +73,20 @@ fetch(urlAPI)
     .then(res => res.results)
     .then(displayEmployees)
     .catch(err => console.log(err));
+
+
+
+// Event Listeners
+//----------------------------------------------------
+gridContainer.addEventListener('click', e => {
+    if (e.target !== gridContainer) {
+        const card = e.target.closest('.card');
+        const index =card.getAttribute('data-index');
+
+        displayModal(index);
+    }
+});
+
+modalClose.addEventListener('click', () => {
+    overlay.classList.add('hidden');
+});
