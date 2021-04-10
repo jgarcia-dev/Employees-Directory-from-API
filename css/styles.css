@@ -4,6 +4,9 @@ body {
     background-color: #fcfcfc;
     font-family: 'Open Sans', sans-serif;
     padding-top: 50px;
+    max-width: 1600px;
+    margin: 30px auto;
+    padding: 10px 20px;
 }
 
 h1 {
@@ -31,19 +34,39 @@ hr {
 }
 
 
-/* Layout
+/* Grid Layout
 ====================================================== */
-header,
-.grid-container {
-    max-width: 1600px;
-    margin: auto;
-    padding: 10px 20px;
-}
-
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     grid-gap: 30px;
+}
+
+
+/* Search
+====================================================== */
+.search-bar {
+    height: 70px;
+    background-color: rgb(243, 243, 236);
+    border: 2px solid #dfdfdf;
+    border-radius: 10px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#query-field {
+    height: 24px;
+    width: 230px;
+    border: 2px solid #dfdfdf;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 0 5px;
+}
+
+#query-field::placeholder {
+    color: rgb(175, 175, 175);
 }
 
 
