@@ -4,6 +4,7 @@ const gridContainer = document.querySelector('.grid-container');
 const overlay = document.querySelector('.overlay');
 const modalContent = document.querySelector('.modal-content');
 const modalClose = document.querySelector('.modal-close');
+const queryField = document.querySelector('#query-field');
 
 
 // Functions 
@@ -78,6 +79,23 @@ fetch(urlAPI)
 
 // Event Listeners
 //----------------------------------------------------
+
+// display employee cards based on user name search
+queryField.addEventListener('input', () => {
+    const search = queryField.value.trim().toLowerCase();
+    const employeeCards = gridContainer.children;
+
+    for (const card of employeeCards) {
+        const employeeCardName = card.lastElementChild.firstElementChild.textContent.toLowerCase();
+        if (!employeeCardName.startsWith(search)) {
+            card.classList.add('hidden');
+        } else {
+            card.classList.remove('hidden');
+        }
+    } 
+});
+
+// display employee modal information
 gridContainer.addEventListener('click', e => {
     if (e.target !== gridContainer) {
         const card = e.target.closest('.card');
@@ -87,6 +105,7 @@ gridContainer.addEventListener('click', e => {
     }
 });
 
+// close modal window
 modalClose.addEventListener('click', () => {
     overlay.classList.add('hidden');
 });
