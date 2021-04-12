@@ -141,6 +141,32 @@ hr {
     transform: scale(1.3);
 }
 
+.arrows {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#prev-btn,
+#next-btn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    transform: scale(1, 2);
+}
+
+#prev-btn:hover,
+#next-btn:hover {
+    transform: scale(1.6, 2.6);
+}
+
+#prev-btn:focus,
+#next-btn:focus {
+    outline: 1px solid #000;
+}
+
+
 .hidden {
     display: none;
 }
