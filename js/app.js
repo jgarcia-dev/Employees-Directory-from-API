@@ -5,6 +5,9 @@ const overlay = document.querySelector('.overlay');
 const modalContent = document.querySelector('.modal-content');
 const modalClose = document.querySelector('.modal-close');
 const queryField = document.querySelector('#query-field');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+let currEmployeeIndex;
 
 
 // Functions 
@@ -99,13 +102,35 @@ queryField.addEventListener('input', () => {
 gridContainer.addEventListener('click', e => {
     if (e.target !== gridContainer) {
         const card = e.target.closest('.card');
-        const index =card.getAttribute('data-index');
+        currEmployeeIndex = parseInt(card.getAttribute('data-index'), 10);
 
-        displayModal(index);
+        displayModal(currEmployeeIndex);
     }
 });
 
 // close modal window
 modalClose.addEventListener('click', () => {
     overlay.classList.add('hidden');
+});
+
+// show previous employee modal window
+prevBtn.addEventListener('click', () => {
+    if (currEmployeeIndex === 0) {
+        currEmployeeIndex = employees.length - 1;
+        displayModal(currEmployeeIndex);
+    } else {
+        currEmployeeIndex--;
+        displayModal(currEmployeeIndex);
+    }
+});
+
+// show next employee modal window
+nextBtn.addEventListener('click', () => {
+    if (currEmployeeIndex === employees.length - 1) {
+        currEmployeeIndex = 0;
+        displayModal(currEmployeeIndex);
+    } else {
+        currEmployeeIndex++;
+        displayModal(currEmployeeIndex);
+    }
 });
